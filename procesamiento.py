@@ -263,6 +263,8 @@ class Aprocesamiento:
         #self.real_array_roc.append(real_input)
         #self.pred_array_roc.append(pred_input)
 
+        #hi
+
         #True  Negative [TN] : No hay, sistema dice no hay
         #True P ositive [TP] : Hay azul y sí hay azul
         #False Positive [FP] : No hay azul, sistema dice que sí hay
