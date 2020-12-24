@@ -16,13 +16,16 @@ class Avision:
 		print("Depth Scale is: " , self.depth_scale)
 
 		#Remove background of objects more than clipping_distance_in_meters x(1) away
-		self.clipping_distance_in_meters = 2 #Metros
-		self.clipping_distance = self.clipping_distance_in_meters / self.depth_scale
+		self.set_clipping_distance_m(2)
 		self.align_to = rs.stream.color # Create an align object
 		self.align = rs.align(self.align_to)
 		self.depth_image = 65.7 #Matriz de profundidad
 		self.color_intrin = 0
 		time.sleep(1.0)
+
+	def set_clipping_distance_m(self, meters):
+		self.clipping_distance_in_meters = meters
+		self.clipping_distance = self.clipping_distance_in_meters / self.depth_scale
 
         #Obtener datos--------------------------------------------------------------------------------------------------------------------------------------
 	def get_image_depth(self): #Filtrar imagen mayor a ciertas distancias
@@ -42,7 +45,8 @@ class Avision:
 		self.bg_removed = np.where((depth_image_3d > self.clipping_distance) | (depth_image_3d <= 0), color_removed, self.color_image)
 		return self.bg_removed
 
-	def get_width_objs(self, x, y, w, h, var_limits_inside):  #Obtener ancho de ciertas coordenadas
+	#Obtener ancho de ciertas coordenadas
+	def get_width_objs(self, x, y, w, h, var_limits_inside): 
 		ix1, iy1, iz1 = x+var_limits_inside, y+round(h/2), (self.depth_image[y+round(h/2),x+var_limits_inside])/10
 		ix2, iy2, iz2 = x+w-var_limits_inside, y+round(h/2), (self.depth_image[y+round(h/2),x+w-var_limits_inside])/10
 		point1 = rs.rs2_deproject_pixel_to_point(self.color_intrin, [ix1, iy1], iz1)

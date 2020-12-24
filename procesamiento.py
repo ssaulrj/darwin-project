@@ -77,7 +77,7 @@ class Aprocesamiento:
         color_mask = cv2.inRange(hsv_frame, dic_colors.get("lower_color_"+color), dic_colors.get("upper_color_"+color))
         color_total = cv2.bitwise_and(image, image, mask=color_mask)
         diff_total = cv2.absdiff(image, color_total)
-        #cv2.imshow('Diferencias detectadas', diff_total)
+        cv2.imshow('Diferencias detectadas', diff_total)
         #cv2.imwrite("framegreen.png", diff_total) #diff_total imagen sin verde
         return diff_total
 
@@ -148,6 +148,7 @@ class Aprocesamiento:
 
     #Buscar objetos-------------------------------------------------------------------------------------------------------------------------------------
     def search_blue(self, image_blue, color):
+        print("search_blue")
         self.x_z_object = 0
         self.x_width_object = 0
         cx, cy = 0, 0
@@ -214,8 +215,6 @@ class Aprocesamiento:
 
         try: #Streaming loop
             while True:
-                #COMMENT PLOT
-                self.obj_mapeo.Aplot_ball_robot()
 
                 num_frames_count += 1
                 print(num_frames_count)
@@ -225,10 +224,11 @@ class Aprocesamiento:
                     self.bg_removed = self.obj_vision.get_image_depth() #Eliminar pixeles mayores a 3 metros
                     #self.bg_removed = self.color_image
                     bg_removed_green = self.filter_color(self.bg_removed, "green") #Filtro color verde
-                    bg_removed_green_blue = self.filter_color(bg_removed_green, "blue") #Filtro color verde 
+                    bg_removed_green_blue = self.filter_color(bg_removed_green, "blue") #Filtro color azul 
 
                     #new_image = self.seg_superpix(bg_removed_green)
 
+                    print("Search blue main")
                     cz_blue_real, width_object = self.search_blue(bg_removed_green.copy(), "blue") #Search blue obstacles
                     
                     self.search_lines(bg_removed_green_blue.copy(), "white")
@@ -242,6 +242,8 @@ class Aprocesamiento:
                     #self.width_array_obj.append(width_object)
 
                     #self.graphic_roc()
+                    #COMMENT PLOT
+                    self.obj_mapeo.Aplot_ball_robot()
 
                 # Salir del bucle si se presiona ESC
                 k = cv2.waitKey(5) & 0xFF

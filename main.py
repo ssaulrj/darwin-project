@@ -37,7 +37,6 @@ class Amain:
         #obj_mapeo.Aplot_obstacle(100, 80, 50) #Objeto identificado, ejemplo
 
         obj_procesamiento.main()
-        obj_mapeo.Aplot_ball_robot()
 
 if __name__ == '__main__':
     obj_main = Amain()
