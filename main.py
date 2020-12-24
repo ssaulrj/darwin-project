@@ -27,18 +27,15 @@ class Amain:
     def main(self):
         print(__file__ + " start!!")
 
+        #Inicializar Clases
         obj_vision = Avision()
         obj_robot = Arobot() #Inicializar variables en Adarwinop de a_robot.py #print(Adarwinop_obj.angle_robot_camera)
         obj_mapeo = Amapeo(self.width_field, self.height_field, self.scaled, self.grid_size) #Inicializar variables en A_field de a_star.py       
         obj_procesamiento = Aprocesamiento(obj_mapeo, obj_robot, obj_vision) #Inicializar variables en A_vision -> clase Acamera
-
-        #self.set_robot_obstacles_pos(Afield_obj, Adarwinop_obj,150, 50, 50)
         
-        obj_mapeo.Aplot_obstacle(40, 60, 25) #Objeto identificado, ejemplo
-        obj_mapeo.Aplot_obstacle(100, 80, 50) #Objeto identificado, ejemplo
+        #obj_mapeo.Aplot_obstacle(40, 60, 25) #Objeto identificado, ejemplo
+        #obj_mapeo.Aplot_obstacle(100, 80, 50) #Objeto identificado, ejemplo
 
-        #while True: #Ubicacion de robot(x,y) y de pelota(x,y)
-            #self.set_robot_ball_pos(Afield_obj, Adarwinop_obj)
         obj_procesamiento.main()
         obj_mapeo.Aplot_ball_robot()
 

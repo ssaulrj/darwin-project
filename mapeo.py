@@ -33,7 +33,8 @@ class Amapeo:
         self.oxx_offset = [] #offset de obstaculos 
         self.oyy_offset = []
         self.offset_obstacles = 10 
-        #COMMENT PLOT self.AfieldCompleted() #LLamar una funcion de la clase misma
+        #COMMENT PLOT 
+        self.AfieldCompleted() #LLamar una funcion de la clase misma
 
     def Aclean_obstacles(self):
         self.oxx = [] #posicion de obstaculos 
@@ -122,7 +123,7 @@ class Amapeo:
         else:
             #gx, gy = 0,0
             print("Positions are: False")
-        self.Aclean_obstacles()
+        #self.Aclean_obstacles()
         return None
 
 class AStarPlanner:
